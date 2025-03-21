@@ -41,13 +41,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Register routes
+// Register API routes first
 registerRoutes(app);
 
 const server = http.createServer(app);
 
 (async () => {
-  // Global error handler (do NOT rethrow errors)
+  // Global error handler
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
@@ -63,11 +63,19 @@ const server = http.createServer(app);
     await setupVite(app, server);
   } else {
     log('Starting in production mode');
-    serveStatic(app);
+    // Serve static files from the public directory
+    const publicPath = path.resolve(__dirname, '../public');
+    app.use(express.static(publicPath));
+
+    // Always return index.html for any non-API routes (for client-side routing)
+    app.get('*', (req, res) => {
+      if (!req.path.startsWith('/api')) {
+        res.sendFile(path.join(publicPath, 'index.html'));
+      }
+    });
   }
 
-  // For local testing, start the server only if an env variable is set.
-  // Set LOCAL_SERVER=true when testing locally.
+  // For local testing, start the server only if an env variable is set
   if (process.env.LOCAL_SERVER === 'true') {
     const port = Number(process.env.PORT) || 3000;
     server.listen({ port, host: '0.0.0.0' }, () => {

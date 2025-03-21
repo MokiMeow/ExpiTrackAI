@@ -5,23 +5,27 @@
       "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
+        "buildCommand": "npm run build"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "dist/server/index.js"
+      "dest": "/dist/server/index.js"
+    },
+    {
+      "src": "^/assets/(.*)",
+      "dest": "/dist/public/assets/$1"
+    },
+    {
+      "src": "^/favicon.ico",
+      "dest": "/dist/public/favicon.ico"
     },
     {
       "src": "/(.*)",
-      "dest": "dist/public/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "dist/public/index.html"
+      "dest": "/dist/public/index.html"
     }
-  ]
+  ],
+  "outputDirectory": "dist"
 }
