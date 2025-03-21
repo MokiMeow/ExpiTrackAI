@@ -4,7 +4,7 @@ import express, { type Express } from 'express';
 import { createServer as createViteServer, createLogger } from 'vite';
 import http from 'http';
 import { fileURLToPath } from 'url';
-import viteConfig from '../vite.config';
+import viteConfig from '../vite.config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,7 +16,7 @@ export function log(message: string, source = 'express') {
     hour: 'numeric',
     minute: '2-digit',
     second: '2-digit',
-    hour12: true,
+    hour12: true
   });
   console.log(`${formattedTime} [${source}] ${message}`);
 }
@@ -36,8 +36,8 @@ export async function setupVite(app: Express, server: http.Server) {
       error: (msg, options) => {
         viteLogger.error(msg, options);
         process.exit(1);
-      },
-    },
+      }
+    }
   });
 
   app.use(vite.middlewares);
@@ -57,10 +57,21 @@ export async function setupVite(app: Express, server: http.Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, '../dist/public');
+  const distPath = path.resolve(__dirname, '../public');
+
   if (!fs.existsSync(distPath)) {
-    throw new Error(`Could not find the build directory: ${distPath}. Please run "npm run build" first.`);
+    const originalDistPath = path.resolve(__dirname, '../dist/public');
+    if (!fs.existsSync(originalDistPath)) {
+      throw new Error(`Could not find the build directory: ${distPath} or ${originalDistPath}. Please run "npm run build" first.`);
+    }
+
+    app.use(express.static(originalDistPath));
+    app.use('*', (_req, res) => {
+      res.sendFile(path.join(originalDistPath, 'index.html'));
+    });
+    return;
   }
+
   app.use(express.static(distPath));
   app.use('*', (_req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));

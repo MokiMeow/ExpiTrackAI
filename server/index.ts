@@ -1,10 +1,12 @@
 import express, { type Request, type Response, type NextFunction } from 'express';
 import http from 'http';
-import { registerRoutes } from './routes';
-import { setupVite, serveStatic, log } from './vite';
+import { registerRoutes } from './routes.js';
+import { setupVite, serveStatic, log } from './vite.js';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -39,12 +41,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// Register routes
+registerRoutes(app);
+
 const server = http.createServer(app);
 
 (async () => {
-  await registerRoutes(app);
-
-  // Global error handler (do not rethrow errors)
+  // Global error handler (do NOT rethrow errors)
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
@@ -52,14 +55,20 @@ const server = http.createServer(app);
     console.error('Global error handler:', err);
   });
 
-  if (app.get('env') === 'development') {
+  // Determine environment
+  const isDev = process.env.NODE_ENV === 'development';
+
+  if (isDev) {
+    log('Starting in development mode');
     await setupVite(app, server);
   } else {
+    log('Starting in production mode');
     serveStatic(app);
   }
 
-  // Only start listening if this module is run directly.
-  if (process.argv[1] === __filename) {
+  // For local testing, start the server only if an env variable is set.
+  // Set LOCAL_SERVER=true when testing locally.
+  if (process.env.LOCAL_SERVER === 'true') {
     const port = Number(process.env.PORT) || 3000;
     server.listen({ port, host: '0.0.0.0' }, () => {
       log(`serving on port ${port}`);

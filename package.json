@@ -4,9 +4,12 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx server/index.ts",
-    "build": "vite build && tsc && esbuild server/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/index.mjs --external:lightningcss --external:@babel/preset-typescript/package.json --external:vite --external:assert --external:buffer --external:child_process --external:cluster --external:console --external:constants --external:crypto --external:dgram --external:dns --external:domain --external:events --external:fs --external:http --external:http2 --external:https --external:module --external:net --external:os --external:path --external:perf_hooks --external:process --external:punycode --external:querystring --external:readline --external:repl --external:stream --external:string_decoder --external:timers --external:tls --external:tty --external:url --external:util --external:v8 --external:vm --external:worker_threads --external:zlib --external:depd",
-    "start": "node dist/index.mjs"
+    "dev": "node dev.js",
+    "build": "node build.js",
+    "start": "node start.js",
+    "clean": "rimraf dist node_modules/.cache",
+    "rebuild": "npm run clean && npm run build",
+    "build-server": "node build-server.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -98,7 +101,8 @@
     "tailwindcss": "^3.4.14",
     "tsx": "^4.19.1",
     "typescript": "5.6.3",
-    "vite": "^5.4.14"
+    "vite": "^5.4.14",
+    "rimraf": "^5.0.5"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
