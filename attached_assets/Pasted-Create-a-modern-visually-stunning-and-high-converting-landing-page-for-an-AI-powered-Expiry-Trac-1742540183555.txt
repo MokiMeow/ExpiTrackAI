@@ -1,0 +1,75 @@
+Create a modern, visually stunning, and high-converting landing page for an **AI-powered Expiry Tracking System** that helps reduce waste, prevent health risks, and optimize consumption by automatically tracking expiry dates of food, medicine, and perishables using computer vision, OCR, and smart notifications.
+
+### Brand Voice & Feel:
+- Clean, futuristic, and minimal design
+- Eco-conscious and tech-savvy tone
+- Friendly, intelligent, and trustworthy
+
+### Landing Page Structure:
+1. **Hero Section** (Full-screen, animated)
+   - Bold headline: “Stop Wasting. Start Tracking. Save the Planet.”
+   - Subheadline: “AI-powered expiry tracking for your home, restaurant, or retail business.”
+   - CTA Button: “Get Started Free” and “Watch Demo”
+   - Animation: Slide-in product mockup with expiry scan overlay (use transform effects)
+   - Background: Gradient animation or looping eco-tech visuals
+
+2. **Problem Section** (Pattern Interruption – dark theme with striking stats)
+   - Heading: “We’re Throwing Away the Future.”
+   - Visual Stat Cards with icons:
+     - "30% of food is wasted globally."
+     - "$1.2B lost in expired medicine annually."
+     - “10M+ tons of waste harming the planet.”
+   - Fade-in text and hover transitions
+
+3. **Solution Section** (Bright, clean UI showcase)
+   - Heading: “AI that Thinks Ahead So You Don’t Have To”
+   - 3-column animated grid:
+     - Barcode & OCR scanning
+     - Smart alerts before items expire
+     - Personalized usage insights
+   - Subtle micro-animations on hover
+
+4. **How It Works** (Interactive Stepper)
+   - Steps:
+     - “Scan Items” → with image recognition animation
+     - “Get Notified” → with bell + time animation
+     - “Act Smart” → recipes + donation tips carousel
+   - Add slide transitions or vertical scrolling effect
+
+5. **Product Benefits Section** (Split layout)
+   - Left: Animated mockup of mobile/web app
+   - Right: List of benefits:
+     - Reduce waste
+     - Save money
+     - Stay healthy
+     - Track anywhere
+   - CSS entrance animation (fade-slide)
+
+6. **Social Proof Section** (Testimonial carousel with avatar animation)
+   - Heading: “Trusted by Conscious Consumers & Smart Businesses”
+   - Carousel:
+     - Restaurants, families, and retailers praising the impact
+     - Include animated rating stars and verified badges
+
+7. **Use Cases Section** (Animated tabs or accordions)
+   - Tabs: “Households” | “Restaurants” | “Retailers” | “Healthcare”
+   - Each tab shows relevant features and screenshots
+
+8. **Call to Action (CTA)** – Sticky or parallax background
+   - Heading: “Ready to Waste Less and Live Smarter?”
+   - Button: “Start Free Trial” with smooth hover animation
+   - Background: A nature-tech blend (animated SVG or subtle motion)
+
+9. **Footer** – Clean and full of trust signals
+   - Logo, nav links, contact
+   - Social icons with hover glow
+   - Privacy policy, terms
+
+### Tech Stack to Reflect:
+- React (Next.js for fast loading)
+- Tailwind CSS with animations
+- Use of Lottie or Framer Motion for animations
+- Responsive design (mobile-first)
+- Font: Modern sans-serif like Inter or Poppins
+
+Include sleek transitions, scroll animations, and modern design language to reflect an innovative, AI-driven solution. The page must look as if designed by a top SaaS startup.
