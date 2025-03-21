@@ -1,0 +1,98 @@
+Build a **stunning, high-end, AI-powered landing page** for an **expiry tracking system** that helps homes, restaurants, and retailers **reduce waste, save money, and stay healthy** with **AI-driven expiration alerts and analytics**.
+
+---
+
+## 🔥 **Design Style:**
+- **Ultra-modern UI like Huly.io & Hatom.com**
+- **Light & Dark Mode toggle** with smooth transitions
+- **Glassmorphism & Neumorphism UI elements** for a futuristic, premium feel
+- **3D animated elements** using Three.js or Lottie
+- **GSAP or Framer Motion animations** for smooth scrolling effects
+- **Parallax scrolling & hover animations** for an engaging feel
+- **Blurry neon-glow effects for CTA buttons**
+- **Dynamic gradients and background videos**
+- **Interactive elements on hover & scroll**
+
+---
+
+## 📌 **Page Structure:**
+
+### **🔹 Hero Section (First Fold)**
+- **Bold 3D animated headline:** "Stop Wasting. Start Tracking. Save the Planet."
+- **Subheading:** AI-powered expiry tracking for homes, restaurants, and businesses.
+- **3D interactive hero image:** A futuristic holographic dashboard of the expiry tracking system.
+- **Glassmorphic CTA buttons:** “Get Started Free” & “Watch Demo” with neon-glow effects.
+- **Background animation:** Subtle moving AI-network particles.
+
+---
+
+### **🔹 Dark-Themed Problem Section**
+- **Headline:** "We're Throwing Away the Future."
+- **Eye-catching data cards:** 
+  - **30%** of food is wasted globally.
+  - **$1.2B lost** in expired medicine annually.
+  - **10M+ tons of waste** harming the planet.
+- **Animated number counters** with scrolling effect.
+
+---
+
+### **🔹 AI-Powered Solution Section**
+- **3D Cards with Hover Effects:**
+  - **Scan Products** with barcode/OCR AI
+  - **Get Smart Alerts** before expiry
+  - **Optimize Consumption** with AI recommendations
+- **Background Parallax Effect** to add depth.
+
+---
+
+### **🔹 How It Works (Interactive Scroll Section)**
+- Step 1: **Scan Items** → Shows a scanning animation
+- Step 2: **Get Notified** → Shows a mobile notification pop-up
+- Step 3: **Act Smart** → Suggests recipes & donation options
+- **Smooth scrolling animations (Framer Motion or GSAP)**.
+
+---
+
+### **🔹 Premium UI Features Section**
+- **3D mockup of mobile & web app**
+- **Split-screen animations:** Show dark mode & light mode switch live.
+- **Dynamic hover effects** that react to cursor movement.
+
+---
+
+### **🔹 Social Proof Section**
+- **Futuristic glassmorphic testimonials slider**
+- **Client logos in a horizontal infinite scroll carousel**
+- **Animated star ratings with motion blur effect.**
+
+---
+
+### **🔹 Use Case Tabs (Interactive Section)**
+- **Households** | **Restaurants** | **Retailers** | **Healthcare**
+- **Each tab has a unique UI animation** when selected.
+
+---
+
+### **🔹 Call to Action (CTA)**
+- **Massive full-width CTA with 3D depth effect.**
+- **Text:** “Ready to Waste Less and Live Smarter?”
+- **Glassmorphic button:** "Start Free Trial" with glowing neon hover effect.
+- **Background video with smooth blur transitions.**
+
+---
+
+## 🛠 **Tech Stack & Features:**
+- **Next.js + React + Tailwind CSS**
+- **Dark Mode / Light Mode Toggle**
+- **GSAP / Framer Motion for Animations**
+- **Glassmorphism & Neumorphism UI**
+- **Three.js / Lottie for 3D Animations**
+- **Floating, glowing CTA buttons**
+- **SEO Optimized for conversions**
+- **100% Mobile Responsive**
+
+---
+
+### 🎯 **Outcome:**
+This landing page will have a premium **Web3 / SaaS AI aesthetic**, with **dynamic interactions, glass UI, 3D animations, and dark/light mode toggling** similar to Huly.io & Hatom.com.
+

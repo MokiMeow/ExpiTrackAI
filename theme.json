@@ -1,6 +1,6 @@
 {
-  "variant": "professional",
-  "primary": "hsl(162, 84%, 39%)",
-  "appearance": "light",
-  "radius": 0.5
+  "variant": "vibrant",
+  "primary": "hsl(240, 80%, 60%)",
+  "appearance": "system",
+  "radius": 1
 }

@@ -11,3 +11,47 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+@layer components {
+  .glassmorphism {
+    @apply bg-opacity-20 backdrop-blur-md rounded-lg border border-opacity-20 shadow-xl;
+  }
+  
+  .neumorphism {
+    @apply shadow-[5px_5px_10px_rgba(0,0,0,0.1),-5px_-5px_10px_rgba(255,255,255,0.1)] rounded-lg;
+  }
+  
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    @apply absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-75 transition-opacity duration-300 group-hover:opacity-100;
+    z-index: -1;
+  }
+  
+  .neon-button {
+    @apply relative px-6 py-3 text-white font-bold overflow-hidden rounded-full 
+           bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500
+           shadow-[0_0_15px_rgba(123,97,255,0.5),0_0_30px_rgba(123,97,255,0.3),0_0_45px_rgba(123,97,255,0.1)]
+           transition-all duration-300 hover:shadow-[0_0_15px_rgba(123,97,255,0.7),0_0_30px_rgba(123,97,255,0.5),0_0_45px_rgba(123,97,255,0.3)]
+           hover:scale-105;
+  }
+  
+  .parallax-section {
+    @apply relative overflow-hidden;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500;
+  }
+  
+  .animated-card {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+  
+  .section-padding {
+    @apply py-20 px-4 md:px-8 lg:px-16;
+  }
+}
