@@ -54,6 +54,7 @@
   
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500;
+    @apply dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500;
   }
   
   .animated-card {
@@ -62,6 +63,15 @@
   
   .section-padding {
     @apply py-20 px-4 md:px-8 lg:px-16;
+  }
+  
+  /* 3D Transformation Styles */
+  .perspective {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
   }
   
   /* Reveal animations */
@@ -95,6 +105,56 @@
   
   .reveal-scale.active {
     @apply opacity-100 scale-100;
+  }
+  
+  /* Custom animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-float-reverse {
+    animation: float 7s ease-in-out infinite reverse;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Background styles */
+  .bg-radial-gradient {
+    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, rgba(30, 64, 175, 0.2) 50%, transparent 100%);
+  }
+  
+  /* Custom keyframes */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 0.4;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-10px);
+    }
   }
   
   /* Animation delays */
