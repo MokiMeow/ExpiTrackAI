@@ -6,8 +6,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Ensure we're in production mode for Vercel builds
+if (process.env.VERCEL) {
+  process.env.NODE_ENV = 'production';
+}
+
 // Clean dist directory
-console.log('Cleaning dist directory...');
+console.log('\nCleaning dist directory...');
 try {
   fs.rmSync(path.join(__dirname, 'dist'), { recursive: true, force: true });
   console.log('Dist directory cleaned.');
@@ -15,15 +20,29 @@ try {
   console.log('No dist directory to clean.');
 }
 
+// Create necessary directories
+const dirs = ['dist', 'dist/public', 'dist/server'];
+dirs.forEach(dir => {
+  const dirPath = path.join(__dirname, dir);
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+});
+
 // Build client
 console.log('\nBuilding client...');
-execSync('vite build', { stdio: 'inherit' });
-console.log('Client built successfully.');
+try {
+  execSync('vite build', { stdio: 'inherit', env: { ...process.env, NODE_ENV: 'production' } });
+  console.log('Client built successfully.');
+} catch (err) {
+  console.error('Client build failed:', err);
+  process.exit(1);
+}
 
 // Build server
 console.log('\nBuilding server...');
 try {
-  execSync('node build-server.js', { stdio: 'inherit' });
+  execSync('node build-server.js', { stdio: 'inherit', env: { ...process.env, NODE_ENV: 'production' } });
   console.log('Server built successfully.');
 } catch (err) {
   console.error('Server build failed:', err);

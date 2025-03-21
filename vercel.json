@@ -1,12 +1,12 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "npm run build"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -19,13 +19,11 @@
       "dest": "/dist/public/assets/$1"
     },
     {
-      "src": "^/favicon.ico",
-      "dest": "/dist/public/favicon.ico"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
       "dest": "/dist/public/index.html"
     }
-  ],
-  "outputDirectory": "dist"
+  ]
 }

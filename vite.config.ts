@@ -8,11 +8,26 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   root: path.resolve(__dirname, 'client'),
-  base: './',
+  base: '/',
   plugins: [react()],
   build: {
     outDir: path.resolve(__dirname, 'dist/public'),
-    emptyOutDir: true
+    emptyOutDir: true,
+    sourcemap: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-alert-dialog',
+            '@radix-ui/react-dialog',
+            // ... other UI dependencies
+          ]
+        }
+      }
+    }
   },
   resolve: {
     alias: {
