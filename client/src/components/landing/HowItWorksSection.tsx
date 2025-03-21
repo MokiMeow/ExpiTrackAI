@@ -353,9 +353,15 @@ export default function HowItWorksSection() {
           {/* Steps container */}
           <div ref={stepsContainerRef} className="relative">
             {/* Connection line between steps */}
-            <div className="connection-line hidden md:block absolute top-32 left-[10%] right-[10%] h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 rounded-full -z-0"></div>
+            {/* Enhanced connection line with animated glow effect */}
+            <div className="connection-line hidden md:block absolute top-32 left-[5%] right-[5%] h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-full -z-0 shadow-[0_0_15px_rgba(79,70,229,0.6)] animate-pulse-glow"></div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-12">
+            {/* Glowing dots along the connection line for enhanced visual interest */}
+            <div className="hidden md:block absolute top-[30px] left-[calc(16.66%-20px)] w-4 h-4 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)] z-10 animate-pulse-glow"></div>
+            <div className="hidden md:block absolute top-[30px] left-[calc(50%-10px)] w-4 h-4 bg-purple-500 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.8)] z-10 animate-pulse-glow animation-delay-500"></div>
+            <div className="hidden md:block absolute top-[30px] left-[calc(83.33%-10px)] w-4 h-4 bg-indigo-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.8)] z-10 animate-pulse-glow animation-delay-1000"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12">
               {steps.map((step, index) => (
                 <motion.div 
                   key={index}
@@ -363,36 +369,65 @@ export default function HowItWorksSection() {
                   initial="hidden"
                   animate="visible"
                   variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1 }
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: {
+                        duration: 0.7,
+                        delay: index * 0.2,
+                        ease: [0.22, 1, 0.36, 1]
+                      }
+                    }
+                  }}
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.3, type: "spring", stiffness: 200 }
                   }}
                 >
-                  {/* Step number */}
+                  {/* Enhanced Step number with neon glow */}
                   <div className="flex justify-center">
                     <motion.div 
-                      className={`step-number relative z-10 w-16 h-16 md:w-20 md:h-20 ${step.iconBgColor} rounded-full flex items-center justify-center shadow-lg mb-6 md:mb-10`}
+                      className={`step-number relative z-10 w-16 h-16 md:w-20 md:h-20 ${step.iconBgColor} rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.8)] mb-8 md:mb-10`}
+                      whileHover={{ 
+                        scale: 1.1,
+                        boxShadow: "0 0 30px rgba(79, 70, 229, 0.8)",
+                        transition: { duration: 0.3 }
+                      }}
                     >
-                      <div className="text-white font-bold text-xl md:text-2xl">
+                      <div className="text-white text-shadow-glow font-bold text-xl md:text-2xl">
                         {step.iconImage}
                       </div>
                       
-                      {/* Pulse effect */}
-                      <div className="absolute inset-0 rounded-full animate-pulse opacity-70"></div>
+                      {/* Enhanced Glow Pulse effect */}
+                      <div className="absolute inset-0 rounded-full animate-pulse-glow"></div>
+                      
+                      {/* Orbit effect */}
+                      <div className="absolute -inset-2 rounded-full border-2 border-white/10 animate-rotate-slow opacity-70"></div>
+                      <div className="absolute w-3 h-3 rounded-full bg-blue-400/60 -top-1 left-1/2 -translate-x-1/2 shadow-glow animate-float-orbit"></div>
                     </motion.div>
                   </div>
                   
-                  {/* Step content */}
-                  <div className="step-content bg-white/80 dark:bg-gray-800/80 glassmorphism rounded-xl p-6 md:p-8 backdrop-blur-sm">
-                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-center dark:text-white">
+                  {/* Enhanced Step content with glassmorphism and glow */}
+                  <div className="step-content bg-white/10 dark:bg-gray-800/30 glassmorphism rounded-xl p-6 md:p-8 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative group">
+                    {/* Subtle glow on hover */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Title with glow effect */}
+                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-center dark:text-white text-shadow-sm dark:text-shadow group-hover:text-shadow-glow transition-all duration-300">
                       {step.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
+                    
+                    <p className="text-gray-600 dark:text-gray-300 text-center mb-6 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                       {step.description}
                     </p>
                     
-                    {/* Step illustration */}
-                    <div className="step-image h-64 md:h-80 relative mt-6 rounded-lg overflow-hidden glassmorphism">
+                    {/* Enhanced Step illustration with glow effect */}
+                    <div className="step-image h-64 md:h-80 relative mt-6 rounded-lg overflow-hidden border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] group-hover:shadow-[0_8px_32px_rgba(79,70,229,0.2)] dark:group-hover:shadow-[0_8px_32px_rgba(79,70,229,0.15)] transition-all duration-500">
                       {step.illustration}
+                      
+                      {/* Overlay glow on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
                   </div>
                 </motion.div>

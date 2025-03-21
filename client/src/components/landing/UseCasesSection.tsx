@@ -53,8 +53,17 @@ export default function UseCasesSection() {
   };
 
   return (
-    <section id="use-cases" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="use-cases" className="py-24 relative bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -right-40 top-10 w-80 h-80 bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute -left-20 bottom-10 w-96 h-96 bg-purple-500/5 dark:bg-purple-600/10 rounded-full blur-3xl"></div>
+        
+        {/* Fine grid pattern */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] dark:opacity-[0.03] bg-[length:20px_20px]"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -62,76 +71,120 @@ export default function UseCasesSection() {
           className="text-center mb-16"
           ref={ref}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">ExpiScan AI for Every Need</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-gray-900 dark:text-white">
+            ExpiScan AI for <span className="gradient-text">Every Need</span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Discover how our solution adapts to different environments and requirements.
           </p>
         </motion.div>
         
-        {/* Tabs navigation */}
-        <div className="flex justify-center flex-wrap mb-8 border-b overflow-x-auto">
+        {/* Enhanced Tabs navigation */}
+        <div className="flex justify-center flex-wrap mb-12 border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
           {Object.keys(useCases).map((tab) => (
             <motion.button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              className={`px-6 py-3 font-medium border-b-2 transition-colors duration-200 ${
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ y: 0, scale: 0.98 }}
+              className={`px-8 py-4 font-medium border-b-2 transition-all duration-300 relative ${
                 activeTab === tab 
-                  ? "text-primary-500 border-primary-500" 
-                  : "text-gray-500 border-transparent hover:text-gray-700"
+                  ? "text-blue-600 dark:text-blue-400 border-blue-600 dark:border-blue-400 font-bold" 
+                  : "text-gray-600 dark:text-gray-400 border-transparent hover:text-blue-500 dark:hover:text-blue-300"
               }`}
             >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {activeTab === tab && (
+                <motion.div
+                  layoutId="activeTabHighlight"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </span>
             </motion.button>
           ))}
         </div>
         
-        {/* Tab content */}
-        <div className="tab-content-container">
+        {/* Enhanced Tab content */}
+        <div className="tab-content-container py-4">
           <AnimatePresence mode="wait">
             {Object.keys(useCases).map((tab) => (
               activeTab === tab && (
                 <motion.div
                   key={tab}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1] 
+                  }}
+                  className="glassmorphism-light dark:glassmorphism-dark rounded-2xl overflow-hidden border border-white/20 dark:border-white/5"
                 >
-                  <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full md:w-1/2 md:pr-8 mb-8 md:mb-0">
-                      <h3 className="text-2xl font-bold mb-4">{useCases[tab as keyof typeof useCases].title}</h3>
-                      <p className="text-gray-600 mb-6">{useCases[tab as keyof typeof useCases].description}</p>
+                  <div className="flex flex-col md:flex-row items-center p-6 md:p-8 backdrop-blur-md">
+                    <div className="w-full md:w-1/2 md:pr-10 mb-10 md:mb-0">
+                      {/* Enhanced title with glow effect and better contrast */}
+                      <h3 className="text-2xl md:text-3xl font-bold mb-5 text-gray-900 dark:text-white text-shadow-sm dark:text-shadow-glow">
+                        {useCases[tab as keyof typeof useCases].title}
+                      </h3>
                       
-                      <ul className="space-y-4">
+                      {/* Enhanced description with better contrast */}
+                      <p className="text-gray-700 dark:text-gray-200 mb-8 text-lg leading-relaxed">
+                        {useCases[tab as keyof typeof useCases].description}
+                      </p>
+                      
+                      {/* Enhanced feature list */}
+                      <ul className="space-y-5">
                         {useCases[tab as keyof typeof useCases].features.map((feature, index) => (
                           <motion.li 
                             key={index}
-                            initial={{ opacity: 0, x: -10 }}
+                            initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.3 }}
+                            transition={{ delay: index * 0.15, duration: 0.5 }}
                             className="flex items-start"
                           >
-                            <svg className="w-6 h-6 text-primary-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span>{feature}</span>
+                            {/* Enhanced checkmark icon with glow */}
+                            <div className="flex-shrink-0 mr-3">
+                              <div className="w-6 h-6 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center shadow-glow">
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                              </div>
+                            </div>
+                            
+                            {/* Enhanced feature text with better contrast */}
+                            <span className="text-gray-800 dark:text-gray-100 font-medium">{feature}</span>
                           </motion.li>
                         ))}
                       </ul>
                     </div>
+                    
+                    {/* Enhanced image container with shadow and glow effects */}
                     <motion.div 
-                      className="w-full md:w-1/2"
+                      className="w-full md:w-1/2 p-2"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.7, delay: 0.2 }}
+                      whileHover={{ 
+                        scale: 1.02,
+                        transition: { duration: 0.3 } 
+                      }}
                     >
-                      <img 
-                        src={useCases[tab as keyof typeof useCases].image} 
-                        alt={`${tab} using ExpiScan`} 
-                        className="rounded-xl shadow-lg w-full"
-                      />
+                      <div className="relative rounded-xl overflow-hidden shadow-2xl dark:shadow-[0_0_25px_rgba(59,130,246,0.2)] border border-white/20 dark:border-white/5">
+                        {/* Overlay glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 mix-blend-overlay"></div>
+                        
+                        <img 
+                          src={useCases[tab as keyof typeof useCases].image} 
+                          alt={`${tab} using ExpiScan`} 
+                          className="w-full h-full object-cover object-center"
+                        />
+                        
+                        {/* Bottom gradient overlay for text readability */}
+                        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      </div>
                     </motion.div>
                   </div>
                 </motion.div>

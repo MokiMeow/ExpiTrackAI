@@ -134,6 +134,9 @@ export default {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-mesh': 'linear-gradient(217deg, rgba(79, 70, 229, 0.1), rgba(17, 24, 39, 0) 70%), linear-gradient(127deg, rgba(99, 102, 241, 0.1), rgba(17, 24, 39, 0) 70%), linear-gradient(336deg, rgba(139, 92, 246, 0.1), rgba(17, 24, 39, 0) 70%)',
         'grid-pattern': 'linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+        'radial-gradient': 'radial-gradient(circle at center, rgba(79, 70, 229, 0.15) 0%, rgba(30, 27, 75, 0.2) 25%, rgba(0, 0, 0, 0) 80%)',
+        'animated-grid': 'repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 100px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 100px)',
+        'dotted-pattern': 'radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)',
       },
       keyframes: {
         "accordion-down": {
