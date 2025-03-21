@@ -110,10 +110,59 @@ export default function Navbar() {
       animate={navVisible ? "visible" : "hidden"}
       className={`fixed w-full z-50 transition-all duration-500 ${
         isScrolled 
-          ? "glassmorphism dark:bg-gray-900/80 backdrop-blur-xl shadow-lg py-2" 
-          : "bg-transparent py-4"
+          ? "glassmorphism-dark backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] py-2" 
+          : "bg-gray-900/30 backdrop-blur-sm py-4"
       }`}
     >
+      {/* Glowing border effect at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-blue-600/0 via-blue-600/50 to-blue-600/0"></div>
+      
+      {/* Moving particle effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          className="absolute w-1 h-1 rounded-full bg-blue-400/60 blur-sm"
+          animate={{ 
+            x: ["-10%", "110%"],
+            y: ["10%", "60%", "20%"],
+            opacity: [0, 1, 0]
+          }} 
+          transition={{ 
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+            times: [0, 0.5, 1]
+          }}
+        />
+        <motion.div 
+          className="absolute w-1 h-1 rounded-full bg-purple-400/60 blur-sm"
+          animate={{ 
+            x: ["110%", "-10%"],
+            y: ["70%", "30%", "50%"],
+            opacity: [0, 1, 0]
+          }} 
+          transition={{ 
+            duration: 18,
+            repeat: Infinity,
+            ease: "linear",
+            times: [0, 0.5, 1]
+          }}
+        />
+        <motion.div 
+          className="absolute w-[2px] h-[2px] rounded-full bg-indigo-400/60 blur-sm"
+          animate={{ 
+            x: ["30%", "70%"],
+            y: ["20%", "80%", "40%"],
+            opacity: [0, 1, 0]
+          }} 
+          transition={{ 
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+            times: [0, 0.5, 1]
+          }}
+        />
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0 flex items-center">
@@ -132,16 +181,16 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="gradient-text font-extrabold text-glow">
-                  Expi<span className="text-blue-600 dark:text-blue-400">Track</span>AI
+                <span className="gradient-text font-extrabold text-shadow-glow">
+                  Expi<span className="text-blue-400">Track</span>AI
                 </span>
-                {/* Subtle animated glow effect under the logo */}
+                {/* Enhanced glowing line with particle effects */}
                 <motion.span 
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-full"
+                  className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-600/0 via-blue-400 to-indigo-600/0 rounded-full shadow-glow"
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ 
                     scaleX: [0, 1, 1, 0], 
-                    opacity: [0, 0.7, 0.7, 0],
+                    opacity: [0, 0.9, 0.9, 0],
                     x: ["-100%", "0%", "0%", "100%"]
                   }}
                   transition={{ 
@@ -150,11 +199,26 @@ export default function Navbar() {
                     repeatDelay: 2
                   }}
                 />
+                
+                {/* Particle effect */}
+                <motion.div
+                  className="absolute -bottom-1 left-1/2 w-1 h-1 rounded-full bg-blue-400 shadow-glow-blue"
+                  animate={{
+                    x: ['-50%', '-30%', '-70%', '-50%'],
+                    y: [0, -10, 0, -5, 0],
+                    opacity: [0, 1, 1, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatDelay: 1
+                  }}
+                />
               </motion.span>
             </motion.div>
           </div>
           
-          {/* Desktop navigation menu */}
+          {/* Enhanced Desktop navigation menu with futuristic look */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -169,93 +233,18 @@ export default function Navbar() {
                 whileHover="hover"
                 whileTap={{ scale: 0.95 }}
                 custom={index}
-                className="relative group text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 text-sm font-medium transition-all duration-200"
+                className="relative group text-gray-200 hover:text-blue-400 px-3 py-2 text-sm font-medium transition-all duration-200"
               >
                 {item.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                 
-                {/* Animated underline effect */}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                {/* Enhanced animated underline effect with glow */}
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center shadow-glow" />
               </motion.a>
             ))}
           </motion.div>
           
           <div className="flex items-center space-x-5">
-            {/* Enhanced Theme toggle button with animation */}
-            <div className="relative">
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                onClick={toggleTheme}
-                className="w-11 h-6 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center transition-colors duration-300 focus:outline-none shadow-sm"
-                aria-label="Toggle dark mode"
-              >
-                <motion.div 
-                  className="w-5 h-5 relative rounded-full transition-all duration-500 transform"
-                  animate={{
-                    translateX: theme === 'dark' ? 20 : 2,
-                    backgroundColor: theme === 'dark' ? 'rgba(56, 189, 248, 0.9)' : 'rgba(255, 255, 255, 1)'
-                  }}
-                >
-                  {/* Sun/Moon icons with rotation animation */}
-                  <AnimatePresence mode="wait">
-                    {theme === 'light' ? (
-                      <motion.svg
-                        key="sun"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute inset-0 h-full w-full text-yellow-500 transition"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        variants={iconVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                      >
-                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                      </motion.svg>
-                    ) : (
-                      <motion.svg
-                        key="moon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute inset-0 h-full w-full text-indigo-200 transition"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        variants={iconVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                      >
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                      </motion.svg>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </motion.button>
-              
-              {/* Stars around the moon in dark mode */}
-              <AnimatePresence>
-                {theme === 'dark' && (
-                  <>
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      transition={{ delay: 0.2, duration: 0.3 }}
-                      className="absolute h-1 w-1 rounded-full bg-blue-200 top-0 right-1"
-                    />
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      transition={{ delay: 0.3, duration: 0.3 }}
-                      className="absolute h-1 w-1 rounded-full bg-blue-200 bottom-1 right-3"
-                    />
-                  </>
-                )}
-              </AnimatePresence>
-            </div>
-            
-            {/* Enhanced CTA button */}
+            {/* Enhanced CTA button with more futuristic styling */}
             <motion.a
               href="#cta"
               initial={{ opacity: 0 }}

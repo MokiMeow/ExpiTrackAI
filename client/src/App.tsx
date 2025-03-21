@@ -4,11 +4,11 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, createContext } from "react";
 
-// Create theme context
+// Create theme context (simplified to only dark mode)
 export const ThemeContext = createContext({
-  theme: "light",
+  theme: "dark",
   toggleTheme: () => {},
 });
 
@@ -22,36 +22,20 @@ function Router() {
 }
 
 function App() {
-  const [theme, setTheme] = useState("light");
-  
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  // Always use dark mode for futuristic UI
+  const theme = "dark";
+  const toggleTheme = () => {}; // Empty function since we're always using dark mode
   
   useEffect(() => {
-    // Check if user has theme preference
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (prefersDark) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    }
+    // Force dark mode
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
   }, []);
-  
-  useEffect(() => {
-    // Update theme when it changes
-    localStorage.setItem("theme", theme);
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen transition-colors duration-300 bg-gradient-to-b from-background to-background/90 dark:from-gray-900 dark:to-gray-950">
+        <div className="min-h-screen transition-colors duration-300 bg-gradient-to-b from-gray-900 to-gray-950">
           <Router />
           <Toaster />
         </div>
