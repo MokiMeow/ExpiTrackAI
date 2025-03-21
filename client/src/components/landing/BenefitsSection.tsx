@@ -1,9 +1,42 @@
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+
+// Custom hook for parallax mouse movement effect
+const useParallaxEffect = (ref: React.RefObject<HTMLElement>, strength: number = 20) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    if (!ref.current) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!ref.current) return;
+      
+      const { left, top, width, height } = ref.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width;
+      const y = (e.clientY - top) / height;
+      
+      // Calculate position relative to the center (0.5, 0.5)
+      setPosition({
+        x: parseFloat(((x - 0.5) * strength).toFixed(2)),
+        y: parseFloat(((y - 0.5) * strength).toFixed(2)),
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [ref, strength]);
+  
+  return position;
+};
 
 export default function BenefitsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
+  
+  // Parallax effect for mouse movement
+  const { x, y: mouseY } = useParallaxEffect(mockupRef, 15);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -210,10 +243,14 @@ export default function BenefitsSection() {
               {/* Animated border */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-indigo-600/30 rounded-2xl blur-xl opacity-70 animate-pulse-glow"></div>
               
-              <div className="relative transform-style-3d">
+              <div className="relative transform-style-3d" ref={mockupRef}>
                 <motion.div
                   initial={{ rotateY: 10, rotateX: 10 }}
                   animate={{ rotateY: [-5, 5, -5], rotateX: [5, -5, 5] }}
+                  style={{ 
+                    rotateY: x,
+                    rotateX: mouseY,
+                  }}
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                   className="relative glassmorphism-premium rounded-2xl overflow-hidden shadow-2xl border border-white/10"
                 >

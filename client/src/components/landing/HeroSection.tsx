@@ -1,7 +1,114 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import * as THREE from "three";
+
+// Matrix-inspired digital rain effect
+const DigitalRain = ({ className }: { className?: string }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const updateDimensions = () => {
+      if (!canvasRef.current) return;
+      const { width, height } = canvasRef.current.getBoundingClientRect();
+      setDimensions({ width, height });
+      canvasRef.current.width = width;
+      canvasRef.current.height = height;
+    };
+    
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+  
+  useEffect(() => {
+    if (!canvasRef.current || dimensions.width === 0) return;
+    
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    const fontSize = 12;
+    const columns = Math.floor(dimensions.width / fontSize);
+    
+    // Create an array of y positions for each column
+    const drops: number[] = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * -100); // Start above the canvas for a staggered effect
+    }
+    
+    // Character set for the rain - using alphanumeric + symbols for a tech feel
+    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+    
+    // Variables for fading effect
+    const maxOpacity = 0.5; // Maximum opacity for the brightest characters
+    const fadeSpeed = 0.95; // How quickly the characters fade (0-1)
+    
+    // Variables for color transitions
+    const primaryColor = [10, 200, 180]; // Cyan/blue color for the rain
+    const highlightColor = [180, 255, 180]; // Brighter color for the "head" of each column
+    
+    // Clear the canvas once at the beginning
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+    ctx.fillRect(0, 0, dimensions.width, dimensions.height);
+    
+    const draw = () => {
+      // Add semi-transparent black rectangle on each frame for trailing/fading effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, dimensions.width, dimensions.height);
+      
+      for (let i = 0; i < drops.length; i++) {
+        if (drops[i] * fontSize > dimensions.height && Math.random() > 0.99) {
+          // Reset column to top with some randomness
+          drops[i] = 0;
+        }
+        
+        // Get a random character
+        const charIndex = Math.floor(Math.random() * chars.length);
+        const char = chars[charIndex];
+        
+        // Calculate opacity and color based on position
+        const yPos = drops[i] * fontSize;
+        
+        // Leading character (head of the column) gets highlight color
+        if (drops[i] >= 0) {
+          const highlight = Math.random() > 0.5; // Randomly highlight some characters for flickering effect
+          
+          if (highlight) {
+            ctx.fillStyle = `rgba(${highlightColor[0]}, ${highlightColor[1]}, ${highlightColor[2]}, ${maxOpacity})`;
+          } else {
+            ctx.fillStyle = `rgba(${primaryColor[0]}, ${primaryColor[1]}, ${primaryColor[2]}, ${maxOpacity})`;
+          }
+          
+          ctx.font = `${fontSize}px monospace`;
+          ctx.fillText(char, i * fontSize, yPos);
+        }
+        
+        // Increment y position for next frame
+        drops[i]++;
+      }
+      
+      requestAnimationFrame(draw);
+    };
+    
+    // Start the animation
+    const animationFrame = requestAnimationFrame(draw);
+    
+    // Clean up
+    return () => cancelAnimationFrame(animationFrame);
+  }, [dimensions]);
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      className={`absolute inset-0 z-0 ${className || ''}`}
+    />
+  );
+};
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -254,6 +361,9 @@ export default function HeroSection() {
 
   return (
     <section id="hero" ref={sectionRef} className="relative overflow-hidden pt-32 md:pt-24 pb-16 md:pb-20 min-h-screen">
+      {/* Matrix-style digital rain effect */}
+      <DigitalRain className="opacity-30" />
+      
       {/* Animated background particles */}
       <div ref={particlesRef} className="particles-container absolute inset-0 -z-10 overflow-hidden opacity-40 pointer-events-none"></div>
       
