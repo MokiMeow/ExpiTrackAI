@@ -7,7 +7,7 @@ export default defineConfig({
   base: "./",
   plugins: [react()],
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: path.resolve(__dirname, "dist/public"), // ← static goes here
     emptyOutDir: true,
   },
   resolve: {
