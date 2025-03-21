@@ -6,14 +6,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client", "src"),
+      "@": path.resolve(__dirname, "client/src"),
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  root: path.resolve(__dirname, "client"), // 🔥 Fix: Ensure correct root directory
+  root: path.resolve(__dirname, "client"), // Ensures Vite starts in client folder
   build: {
-    outDir: path.resolve(__dirname, "../dist"), // 🔥 Fix: Correct output directory for Vercel
+    outDir: path.resolve(__dirname, "dist/public"), // 🔥 This ensures frontend files go inside dist/public
     emptyOutDir: true,
   },
-  base: "/", // 🔥 Fix: Ensures correct asset paths
+  base: "./", // Ensures paths work correctly
 });
