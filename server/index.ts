@@ -48,9 +48,15 @@ const server = http.createServer(app);
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
+
+    // Send a JSON response to the client
     res.status(status).json({ message });
-    throw err;
+
+    // Log the error instead of rethrowing
+    console.error("Global error handler caught:", err);
+    // throw err;  // ❌ Remove or comment this out
   });
+
 
   // In development, set up Vite's dev middleware
   if (app.get("env") === "development") {
