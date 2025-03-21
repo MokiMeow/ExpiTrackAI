@@ -14,17 +14,18 @@ export default defineConfig({
     outDir: path.resolve(__dirname, 'dist/public'),
     emptyOutDir: true,
     sourcemap: true,
-    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: [
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-alert-dialog',
-            '@radix-ui/react-dialog',
-            // ... other UI dependencies
-          ]
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) {
+              return 'vendor-react';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-radix';
+            }
+            return 'vendor';
+          }
         }
       }
     }

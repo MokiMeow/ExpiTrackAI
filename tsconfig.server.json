@@ -11,11 +11,20 @@
     "resolveJsonModule": true,
     "noEmit": false,
     "allowImportingTsExtensions": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "composite": true,
+    "declaration": true
   },
+  "files": [
+    "server/index.ts",
+    "server/routes.ts",
+    "server/vite.ts",
+    "vite.config.ts"
+  ],
   "include": [
     "server/**/*",
-    "shared/**/*"
+    "shared/**/*",
+    "*.ts"
   ],
   "exclude": [
     "node_modules",

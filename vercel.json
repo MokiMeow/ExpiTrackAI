@@ -2,28 +2,33 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
+  "framework": null,
   "builds": [
     {
-      "src": "package.json",
+      "src": "dist/server/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "dist/public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/dist/server/index.js"
+      "dest": "dist/server/index.js"
     },
     {
-      "src": "^/assets/(.*)",
-      "dest": "/dist/public/assets/$1"
+      "src": "/assets/(.*)",
+      "dest": "dist/public/assets/$1"
     },
     {
-      "handle": "filesystem"
+      "src": "/favicon.ico",
+      "dest": "dist/public/favicon.ico"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "dest": "dist/public/index.html"
     }
   ]
 }

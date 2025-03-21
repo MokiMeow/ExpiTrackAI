@@ -10,7 +10,7 @@
     "clean": "rimraf dist node_modules/.cache",
     "rebuild": "npm run clean && npm run build",
     "build-server": "node build-server.js",
-    "vercel-build": "npm run build"
+    "vercel-build": "node vercel-build.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
