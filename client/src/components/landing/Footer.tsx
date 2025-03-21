@@ -71,11 +71,11 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="text-xl font-semibold mb-4">ExpiScan<span className="text-primary-400">AI</span></div>
+            <div className="text-xl font-semibold mb-4">ExpiTrack<span className="text-primary-400">AI</span></div>
             <p className="text-gray-400 mb-4">Reducing waste and making the world better through intelligent expiry tracking.</p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <motion.a 
+                <motion.a
                   key={index}
                   href={link.href}
                   whileHover={{ scale: 1.1, color: "#10B981" }}
@@ -87,7 +87,7 @@ export default function Footer() {
               ))}
             </div>
           </motion.div>
-          
+
           {/* Quick Links */}
           {footerSections.map((section, sectionIndex) => (
             <motion.div
@@ -100,8 +100,8 @@ export default function Footer() {
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <motion.a 
-                      href={link.href} 
+                    <motion.a
+                      href={link.href}
                       whileHover={{ x: 3 }}
                       className="text-gray-400 hover:text-white transition-colors duration-150"
                     >
@@ -113,14 +113,14 @@ export default function Footer() {
             </motion.div>
           ))}
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-12 pt-8 border-t border-gray-700"
         >
-          <p className="text-gray-400 text-center">© {new Date().getFullYear()} ExpiScan AI. All rights reserved.</p>
+          <p className="text-gray-400 text-center">© {new Date().getFullYear()} ExpiTrackAI. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

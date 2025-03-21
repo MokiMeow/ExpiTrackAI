@@ -12,7 +12,7 @@ export default function UseCasesSection() {
   const useCases = {
     households: {
       title: "Smart Home Management",
-      description: "Families waste an average of $1,600 on expired food each year. ExpiScan AI helps you track everything in your kitchen, medicine cabinet, and pantry.",
+      description: "Families waste an average of $1,600 on expired food each year. ExpiTrackAI helps you track everything in your kitchen, medicine cabinet, and pantry.",
       features: [
         "Track refrigerator, pantry, and medicine cabinet items",
         "Family sharing with permission controls",
@@ -58,13 +58,13 @@ export default function UseCasesSection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -right-40 top-10 w-80 h-80 bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-3xl"></div>
         <div className="absolute -left-20 bottom-10 w-96 h-96 bg-purple-500/5 dark:bg-purple-600/10 rounded-full blur-3xl"></div>
-        
+
         {/* Fine grid pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] dark:opacity-[0.03] bg-[length:20px_20px]"></div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -72,13 +72,13 @@ export default function UseCasesSection() {
           ref={ref}
         >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-gray-900 dark:text-white">
-            ExpiScan AI for <span className="gradient-text">Every Need</span>
+          ExpiTrack AI for <span className="gradient-text">Every Need</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Discover how our solution adapts to different environments and requirements.
           </p>
         </motion.div>
-        
+
         {/* Enhanced Tabs navigation */}
         <div className="flex justify-center flex-wrap mb-12 border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
           {Object.keys(useCases).map((tab) => (
@@ -88,8 +88,8 @@ export default function UseCasesSection() {
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ y: 0, scale: 0.98 }}
               className={`px-8 py-4 font-medium border-b-2 transition-all duration-300 relative ${
-                activeTab === tab 
-                  ? "text-blue-600 dark:text-blue-400 border-blue-600 dark:border-blue-400 font-bold" 
+                activeTab === tab
+                  ? "text-blue-600 dark:text-blue-400 border-blue-600 dark:border-blue-400 font-bold"
                   : "text-gray-600 dark:text-gray-400 border-transparent hover:text-blue-500 dark:hover:text-blue-300"
               }`}
             >
@@ -106,7 +106,7 @@ export default function UseCasesSection() {
             </motion.button>
           ))}
         </div>
-        
+
         {/* Enhanced Tab content */}
         <div className="tab-content-container py-4">
           <AnimatePresence mode="wait">
@@ -117,9 +117,9 @@ export default function UseCasesSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ 
+                  transition={{
                     duration: 0.5,
-                    ease: [0.22, 1, 0.36, 1] 
+                    ease: [0.22, 1, 0.36, 1]
                   }}
                   className="glassmorphism-light dark:glassmorphism-dark rounded-2xl overflow-hidden border border-white/20 dark:border-white/5"
                 >
@@ -129,16 +129,16 @@ export default function UseCasesSection() {
                       <h3 className="text-2xl md:text-3xl font-bold mb-5 text-gray-900 dark:text-white text-shadow-sm dark:text-shadow-glow">
                         {useCases[tab as keyof typeof useCases].title}
                       </h3>
-                      
+
                       {/* Enhanced description with better contrast */}
                       <p className="text-gray-700 dark:text-gray-200 mb-8 text-lg leading-relaxed">
                         {useCases[tab as keyof typeof useCases].description}
                       </p>
-                      
+
                       {/* Enhanced feature list */}
                       <ul className="space-y-5">
                         {useCases[tab as keyof typeof useCases].features.map((feature, index) => (
-                          <motion.li 
+                          <motion.li
                             key={index}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -153,35 +153,35 @@ export default function UseCasesSection() {
                                 </svg>
                               </div>
                             </div>
-                            
+
                             {/* Enhanced feature text with better contrast */}
                             <span className="text-gray-800 dark:text-gray-100 font-medium">{feature}</span>
                           </motion.li>
                         ))}
                       </ul>
                     </div>
-                    
+
                     {/* Enhanced image container with shadow and glow effects */}
-                    <motion.div 
+                    <motion.div
                       className="w-full md:w-1/2 p-2"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.7, delay: 0.2 }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.02,
-                        transition: { duration: 0.3 } 
+                        transition: { duration: 0.3 }
                       }}
                     >
                       <div className="relative rounded-xl overflow-hidden shadow-2xl dark:shadow-[0_0_25px_rgba(59,130,246,0.2)] border border-white/20 dark:border-white/5">
                         {/* Overlay glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 mix-blend-overlay"></div>
-                        
-                        <img 
-                          src={useCases[tab as keyof typeof useCases].image} 
-                          alt={`${tab} using ExpiScan`} 
+
+                        <img
+                          src={useCases[tab as keyof typeof useCases].image}
+                          alt={`${tab} using ExpiTrackAI`}
                           className="w-full h-full object-cover object-center"
                         />
-                        
+
                         {/* Bottom gradient overlay for text readability */}
                         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
                       </div>

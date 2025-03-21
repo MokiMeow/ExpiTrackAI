@@ -4,26 +4,26 @@ import { useInView } from "react-intersection-observer";
 import gsap from "gsap";
 
 // Component for number counter animation
-const CounterAnimation = ({ 
-  value, 
-  suffix = "", 
-  prefix = "", 
+const CounterAnimation = ({
+  value,
+  suffix = "",
+  prefix = "",
   decimals = 0,
   duration = 2.5
-}: { 
-  value: number; 
-  suffix?: string; 
-  prefix?: string; 
+}: {
+  value: number;
+  suffix?: string;
+  prefix?: string;
   decimals?: number;
   duration?: number;
 }) => {
   const [count, setCount] = useState(0);
   const nodeRef = useRef(null);
   const inView = framerUseInView(nodeRef);
-  
+
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
-    
+
     if (inView) {
       let start = 0;
       const end = parseInt(value.toString(), 10);
@@ -35,13 +35,13 @@ const CounterAnimation = ({
           timeout = setTimeout(counter, stepTime);
         }
       };
-      
+
       timeout = setTimeout(counter, stepTime);
     }
-    
+
     return () => clearTimeout(timeout);
   }, [inView, value, duration]);
-  
+
   return (
     <span ref={nodeRef} className="font-bold tabular-nums">
       {prefix}{count}{suffix}
@@ -54,19 +54,19 @@ export default function ProblemSection() {
     triggerOnce: false,
     threshold: 0.2,
   });
-  
+
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (inView && sectionRef.current) {
       // Animate the gradient background
       gsap.fromTo(
         sectionRef.current.querySelector('.gradient-bg'),
-        { 
+        {
           opacity: 0.3,
           backgroundPosition: '0% 50%'
         },
-        { 
+        {
           opacity: 0.7,
           backgroundPosition: '100% 50%',
           duration: 15,
@@ -75,7 +75,7 @@ export default function ProblemSection() {
           ease: "sine.inOut"
         }
       );
-      
+
       // Floating particles
       const particles = sectionRef.current.querySelectorAll('.particle');
       particles.forEach((particle, i) => {
@@ -137,20 +137,20 @@ export default function ProblemSection() {
   ];
 
   return (
-    <section 
-      id="problem" 
+    <section
+      id="problem"
       ref={sectionRef}
       className="relative section-padding overflow-hidden bg-gradient-to-b from-gray-950 to-gray-900 text-white"
     >
       {/* Animated gradient background */}
       <div className="gradient-bg absolute inset-0 opacity-50 bg-gradient-to-tr from-blue-900/30 via-purple-900/30 to-gray-900/30 bg-[length:200%_200%]"></div>
-      
+
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(15)].map((_, i) => (
-          <div 
-            key={i} 
-            className={`particle absolute w-${Math.random() > 0.5 ? '3' : '2'} h-${Math.random() > 0.5 ? '3' : '2'} rounded-full 
+          <div
+            key={i}
+            className={`particle absolute w-${Math.random() > 0.5 ? '3' : '2'} h-${Math.random() > 0.5 ? '3' : '2'} rounded-full
             ${i % 3 === 0 ? 'bg-blue-500/30' : i % 3 === 1 ? 'bg-purple-500/30' : 'bg-indigo-500/30'}`}
             style={{
               top: `${Math.random() * 100}%`,
@@ -161,10 +161,10 @@ export default function ProblemSection() {
           />
         ))}
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div ref={ref} className="reveal">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
@@ -174,14 +174,14 @@ export default function ProblemSection() {
               We're <span className="text-red-500">Throwing Away</span> the Future.
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Every day, we discard valuable resources that could be saved with better management. 
-              The cost isn't just financial—it's environmental and ethical.
+              Every day, we discard valuable resources that could be saved with better management.
+              The cost isn't just financial it's environmental and ethical.
             </p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {stats.map((stat, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -191,7 +191,7 @@ export default function ProblemSection() {
               >
                 {/* Animated glow effect */}
                 <div className={`absolute inset-0 rounded-xl bg-${stat.glowColor}-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl`}></div>
-                
+
                 {/* Icon with gradient background */}
                 <div className="relative mb-6">
                   <div className={`flex items-center justify-center w-20 h-20 mx-auto rounded-xl ${stat.color} shadow-lg border border-white/10`}>
@@ -201,9 +201,9 @@ export default function ProblemSection() {
                   </div>
                   <div className="absolute -inset-1 rounded-xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-700 -z-10 bg-gradient-to-tr from-white/10 via-white/5 to-transparent"></div>
                 </div>
-                
+
                 {/* Animated counter */}
-                <motion.h3 
+                <motion.h3
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={inView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.7, delay: stat.delay + 0.3 }}
@@ -220,9 +220,9 @@ export default function ProblemSection() {
                     <span>{stat.prefix}{stat.value}{stat.suffix}</span>
                   )}
                 </motion.h3>
-                
+
                 <p className="text-gray-300 text-center text-lg">{stat.description}</p>
-                
+
                 {/* Decorative line */}
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
                   <div className={`h-1 w-16 rounded-full bg-gradient-to-r from-transparent via-${stat.glowColor}-500/70 to-transparent`}></div>
