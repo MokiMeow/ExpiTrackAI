@@ -310,11 +310,24 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="section-padding relative overflow-hidden dark:bg-gray-800 bg-white">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -left-10 top-10 w-64 h-64 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute right-0 bottom-10 w-72 h-72 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-3xl opacity-40"></div>
+    <section id="how-it-works" ref={sectionRef} className="section-padding relative overflow-hidden dark:bg-gray-900 bg-gray-50 py-24 sm:py-32">
+      {/* Enhanced background decoration with animated glow effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Radial gradient background for depth */}
+        <div className="absolute inset-0 bg-radial-gradient opacity-60"></div>
+        
+        {/* Grid pattern for futuristic look */}
+        <div className="absolute inset-0 bg-grid-pattern bg-[length:30px_30px] opacity-[0.03]"></div>
+        
+        {/* Animated glowing orbs */}
+        <div className="absolute -left-20 top-10 w-80 h-80 bg-blue-600/20 dark:bg-blue-600/30 rounded-full blur-3xl opacity-60 animate-pulse-glow-strong"></div>
+        <div className="absolute right-0 bottom-10 w-96 h-96 bg-purple-600/20 dark:bg-purple-600/30 rounded-full blur-3xl opacity-50 animate-pulse-glow-strong animation-delay-2000"></div>
+        <div className="absolute left-1/3 bottom-0 w-64 h-64 bg-indigo-600/20 dark:bg-indigo-600/30 rounded-full blur-3xl opacity-40 animate-pulse-glow-strong animation-delay-1000"></div>
+        
+        {/* Moving particles for dynamic effect */}
+        <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-blue-500/60 blur-sm animate-float-orbit"></div>
+        <div className="absolute top-3/4 left-2/3 w-2 h-2 rounded-full bg-purple-500/60 blur-sm animate-float-orbit animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-3/4 w-4 h-4 rounded-full bg-indigo-500/60 blur-sm animate-float-orbit animation-delay-2000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
