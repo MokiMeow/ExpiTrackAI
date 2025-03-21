@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground transition-colors duration-300;
   }
   
   html {
@@ -18,65 +18,137 @@
   html.dark {
     color-scheme: dark;
   }
+  
+  /* Smooth scrollbar for a premium feel */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-600;
+  }
+  
+  /* Improved text selection styling */
+  ::selection {
+    @apply bg-indigo-500/30 text-foreground;
+  }
 }
 
 @layer components {
+  /* Enhanced Glassmorphism - more pronounced for futuristic UI */
   .glassmorphism {
-    @apply bg-opacity-20 backdrop-blur-md rounded-lg border border-opacity-20 shadow-xl;
+    @apply bg-white/10 dark:bg-black/20 backdrop-blur-xl rounded-xl 
+           border border-white/10 dark:border-white/5 
+           shadow-[0_8px_32px_rgba(0,0,0,0.1)] 
+           dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)];
   }
   
+  /* Advanced Neumorphism with better depth perception */
   .neumorphism {
-    @apply shadow-[5px_5px_10px_rgba(0,0,0,0.1),-5px_-5px_10px_rgba(255,255,255,0.1)] rounded-lg;
-    @apply dark:shadow-[5px_5px_10px_rgba(0,0,0,0.3),-5px_-5px_10px_rgba(255,255,255,0.02)];
+    @apply bg-gray-100 dark:bg-gray-900
+           shadow-[5px_5px_15px_rgba(0,0,0,0.1),-5px_-5px_15px_rgba(255,255,255,0.7)] 
+           dark:shadow-[5px_5px_15px_rgba(0,0,0,0.5),-5px_-5px_15px_rgba(255,255,255,0.03)]
+           rounded-2xl transition-all duration-300;
   }
   
+  /* Enhanced Glow Effects */
   .glow-effect {
-    @apply relative;
+    @apply relative overflow-hidden isolate;
   }
   
   .glow-effect::before {
     content: '';
-    @apply absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-75 transition-opacity duration-300 group-hover:opacity-100;
+    @apply absolute -inset-1 bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 
+           rounded-lg blur-md opacity-75 transition-all duration-300 
+           hover:opacity-100 hover:scale-105;
     z-index: -1;
   }
   
+  /* Premium Neon Button with advanced glow effects */
   .neon-button {
     @apply relative px-6 py-3 text-white font-bold overflow-hidden rounded-full 
-           bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500
-           shadow-[0_0_15px_rgba(123,97,255,0.5),0_0_30px_rgba(123,97,255,0.3),0_0_45px_rgba(123,97,255,0.1)]
-           transition-all duration-300 hover:shadow-[0_0_15px_rgba(123,97,255,0.7),0_0_30px_rgba(123,97,255,0.5),0_0_45px_rgba(123,97,255,0.3)]
-           hover:scale-105;
+           bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500
+           shadow-[0_0_10px_rgba(79,70,229,0.5),0_0_30px_rgba(79,70,229,0.3),0_0_45px_rgba(79,70,229,0.1)]
+           transition-all duration-300 
+           hover:shadow-[0_0_15px_rgba(79,70,229,0.7),0_0_30px_rgba(79,70,229,0.5),0_0_45px_rgba(79,70,229,0.3)]
+           hover:scale-[1.02];
   }
   
+  /* Advanced parallax section */
   .parallax-section {
     @apply relative overflow-hidden;
+    transform-style: preserve-3d;
   }
   
+  /* Enhanced gradient text with glow */
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500;
-    @apply dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500
+           dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400
+           drop-shadow-sm;
   }
   
+  /* Animated card with hover effects and 3D transform */
   .animated-card {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+    @apply transition-all duration-500 ease-out 
+           hover:-translate-y-2 hover:shadow-xl 
+           hover:shadow-indigo-500/20 dark:hover:shadow-indigo-700/20
+           active:scale-95;
   }
   
+  /* Consistent section padding */
   .section-padding {
-    @apply py-20 px-4 md:px-8 lg:px-16;
+    @apply py-24 px-4 sm:px-6 lg:px-8;
   }
   
-  /* 3D Transformation Styles */
+  /* Enhanced 3D Transformation Styles */
   .perspective {
-    perspective: 1000px;
+    perspective: 2000px;
   }
   
   .transform-style-3d {
     transform-style: preserve-3d;
+    will-change: transform;
   }
   
-  /* Reveal animations */
+  /* Advanced hover effect cards */
+  .hover-card {
+    @apply rounded-xl overflow-hidden relative transition-all duration-300
+           hover:shadow-lg hover:shadow-indigo-500/20 dark:hover:shadow-indigo-500/10
+           hover:-translate-y-1;
+  }
+  
+  .hover-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10
+           opacity-0 transition-opacity duration-300;
+    pointer-events: none;
+  }
+  
+  .hover-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Text glow effects */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+  }
+  
+  .text-glow-light {
+    text-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
+  }
+  
+  /* Reveal animations with enhanced easing */
   .reveal {
-    @apply opacity-0 transform translate-y-10 transition-all duration-700 ease-out;
+    @apply opacity-0 transform translate-y-10 transition-all duration-700;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .reveal.active {
@@ -84,7 +156,8 @@
   }
   
   .reveal-left {
-    @apply opacity-0 transform -translate-x-20 transition-all duration-700 ease-out;
+    @apply opacity-0 transform -translate-x-16 transition-all duration-700;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .reveal-left.active {
@@ -92,7 +165,8 @@
   }
   
   .reveal-right {
-    @apply opacity-0 transform translate-x-20 transition-all duration-700 ease-out;
+    @apply opacity-0 transform translate-x-16 transition-all duration-700;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .reveal-right.active {
@@ -100,77 +174,167 @@
   }
   
   .reveal-scale {
-    @apply opacity-0 transform scale-90 transition-all duration-700 ease-out;
+    @apply opacity-0 transform scale-95 transition-all duration-700;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .reveal-scale.active {
     @apply opacity-100 scale-100;
   }
   
-  /* Custom animations */
+  /* Enhanced Custom animations */
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
   
   .animate-float-slow {
-    animation: float 8s ease-in-out infinite;
+    animation: float 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
   
   .animate-float-reverse {
-    animation: float 7s ease-in-out infinite reverse;
+    animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
   }
   
   .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulseSlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
   .animate-pulse-glow {
-    animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulseGlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
-  /* Background styles */
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+  
+  .animate-morph {
+    animation: morph 8s ease-in-out infinite;
+  }
+  
+  /* Background styles with advanced gradients */
+  .bg-grid {
+    background-size: 100px 100px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+  
   .bg-radial-gradient {
-    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, rgba(30, 64, 175, 0.2) 50%, transparent 100%);
+    background: radial-gradient(circle at center, 
+                               rgba(79, 70, 229, 0.2) 0%, 
+                               rgba(30, 64, 175, 0.15) 25%, 
+                               rgba(17, 24, 39, 0) 70%);
   }
   
-  /* Custom keyframes */
+  .bg-gradient-mesh {
+    background: 
+      linear-gradient(217deg, rgba(79, 70, 229, 0.1), rgba(17, 24, 39, 0) 70%),
+      linear-gradient(127deg, rgba(99, 102, 241, 0.1), rgba(17, 24, 39, 0) 70%),
+      linear-gradient(336deg, rgba(139, 92, 246, 0.1), rgba(17, 24, 39, 0) 70%);
+  }
+  
+  /* Enhanced Custom keyframes */
   @keyframes float {
     0% {
-      transform: translateY(0px);
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-10px) translateX(5px) rotate(1deg);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-20px) translateX(0px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-10px) translateX(-5px) rotate(-1deg);
     }
     100% {
-      transform: translateY(0px);
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+  }
+  
+  @keyframes pulseSlow {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
     }
   }
   
   @keyframes pulseGlow {
     0%, 100% {
       opacity: 0.4;
-      transform: translateY(0);
+      filter: brightness(1) blur(3px);
+      transform: scale(0.95);
     }
     50% {
       opacity: 1;
-      transform: translateY(-10px);
+      filter: brightness(1.1) blur(5px);
+      transform: scale(1.05);
     }
   }
   
-  /* Animation delays */
+  @keyframes morph {
+    0%, 100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    25% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    50% {
+      border-radius: 50% 60% 30% 60% / 40% 30% 70% 50%;
+    }
+    75% {
+      border-radius: 60% 40% 50% 40% / 30% 50% 40% 70%;
+    }
+  }
+  
+  /* Animation delays for staggered animations */
+  .delay-100 {
+    transition-delay: 100ms;
+  }
+  
   .delay-200 {
     transition-delay: 200ms;
+  }
+  
+  .delay-300 {
+    transition-delay: 300ms;
   }
   
   .delay-400 {
     transition-delay: 400ms;
   }
   
+  .delay-500 {
+    transition-delay: 500ms;
+  }
+  
   .delay-600 {
     transition-delay: 600ms;
   }
   
+  .delay-700 {
+    transition-delay: 700ms;
+  }
+  
   .delay-800 {
     transition-delay: 800ms;
+  }
+  
+  /* Dark mode toggle animation */
+  .dark-mode-toggle {
+    @apply relative cursor-pointer w-12 h-6 bg-gray-300 dark:bg-gray-800 rounded-full transition-colors duration-500;
+  }
+  
+  .dark-mode-toggle::before {
+    content: '';
+    @apply absolute left-1 top-1 w-4 h-4 bg-white dark:bg-blue-400 rounded-full transition-all duration-500;
+  }
+  
+  .dark-mode-toggle.dark::before {
+    @apply left-7 dark:bg-yellow-300;
   }
 }

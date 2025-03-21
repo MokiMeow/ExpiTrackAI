@@ -1,0 +1,62 @@
+Build a **high-end, ultra-modern AI expiry tracking landing page** with a **futuristic UI** similar to **Huly.io & Hatom.com**. It should feel smooth, visually stunning, and highly interactive with **Framer Motion, Three.js, and optimized animations** for ultra-fast rendering.
+
+---
+
+### **🔹 Fixes & Improvements Needed**
+1. **Hero Section Fixes:**
+   - The text **"Stop Wasting. Start Tracking."** is too big and touching the navbar. Adjust spacing, **reduce font size**, and ensure perfect responsiveness.
+   - Ensure the **CTA buttons (Get Started Free & Watch Demo)** have a **smooth hover glow effect** and scale slightly on hover.
+   - **Add a subtle particle animation** in the background for a futuristic AI look.
+   - **Hero image interaction:** Implement a **Three.js floating effect** for the mockups.
+
+2. **Dark Mode / Light Mode Issues:**
+   - Ensure the **toggle actually works** properly with smooth transitions.
+   - Background and text colors should shift fluidly using **Framer Motion**.
+   - Add a **small sun/moon rotation animation** on the dark mode toggle.
+
+3. **Performance Optimizations:**
+   - **Improve render speed** by optimizing animations with **Framer Motion**.
+   - Ensure all elements **lazy-load** efficiently without layout shifts.
+   - Use **GPU acceleration for animations** to keep them ultra-smooth.
+   - Preload important assets to avoid flickering when switching themes.
+
+4. **Section Spacing & Design Issues:**
+   - The **"How It Works" section** is too dark. Increase contrast, add **a neon glow effect** to make steps **pop**.
+   - The **"Smart Home Management" text is faded out and unreadable**. Improve contrast & add a **hover effect** to reveal hidden content.
+   - Fix alignment issues in **testimonials & benefits sections** by ensuring proper grid spacing.
+
+5. **Better Animations & Interactivity:**
+   - **Use Framer Motion for smooth scroll effects** (parallax on hero, staggered reveal for sections).
+   - Implement **Three.js for interactive 3D elements** (hover-based movement on the hero mockup).
+   - Add **a slight scroll-based depth effect** for cards & UI components.
+   - Ensure buttons have **micro-interactions** that respond to cursor movement.
+   - Improve **testimonial carousel smoothness** for a more premium feel.
+
+---
+
+### **🔹 High-End Features to Include**
+✅ **Glassmorphism & Neumorphism UI** for a sleek, futuristic touch.  
+✅ **Hover-activated neon glow effects** for buttons & key elements.  
+✅ **Dynamic, responsive layouts** that work perfectly across all devices.  
+✅ **Faster, optimized animations** using **Framer Motion & GSAP**.  
+✅ **Parallax background animations** for depth & immersion.  
+✅ **Real-time light/dark mode switching** without flicker.  
+✅ **Optimized for SEO & Performance (Lazy-loading, Asset Optimization, GPU Rendering).**  
+
+---
+
+### **🚀 Outcome**
+This landing page should feel **ultra-premium**, **smoothly animated**, and **incredibly fast**, just like **Huly.io and Hatom.com**. It should reflect **next-gen AI technology** with **interactive visuals, deep animations, and a highly engaging user experience.**
+
+---
+
+### **📌 Tech Stack to Use**
+- **Next.js + React + Tailwind CSS** for structure.  
+- **Framer Motion + GSAP** for next-level animations.  
+- **Three.js** for **3D floating elements**.  
+- **Light/Dark Mode with Animated Transitions** using **Framer Motion**.  
+- **Lazy Loading & Asset Preloading** for speed optimization.  
+
+---
+
+**Make it better, smoother, and more visually engaging. The previous version was good, but this one needs to be perfect.** 🚀🔥  
