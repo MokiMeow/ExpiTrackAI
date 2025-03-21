@@ -10,10 +10,10 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  root: path.resolve(__dirname, "client"), // Ensures Vite starts in client folder
+  root: path.resolve(__dirname, "client"),
   build: {
-    outDir: path.resolve(__dirname, "dist/public"), // 🔥 This ensures frontend files go inside dist/public
+    outDir: path.resolve(__dirname, "../dist/public"), // 🔥 Ensure frontend files go inside dist/public
     emptyOutDir: true,
   },
-  base: "./", // Ensures paths work correctly
+  base: "/public/", // 🔥 Ensures correct asset paths in production
 });
