@@ -1,23 +1,24 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Define __filename and __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  // We want Vite to start building from your "client" folder
-  root: path.resolve(__dirname, "client"),
-  base: "./", // ensures relative paths for assets in production
+  root: path.resolve(__dirname, 'client'),
+  base: './',
   plugins: [react()],
-
   build: {
-    // Put final build inside "dist/public"
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: path.resolve(__dirname, 'dist/public'),
     emptyOutDir: true,
   },
-
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client", "src"),
-      "@shared": path.resolve(__dirname, "shared"),
+      '@': path.resolve(__dirname, 'client/src'),
+      '@shared': path.resolve(__dirname, 'shared'),
     },
   },
 });

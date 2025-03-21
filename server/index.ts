@@ -1,7 +1,10 @@
-import express, { Request, Response, NextFunction } from "express";
-import http from "http";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import express, { type Request, type Response, type NextFunction } from 'express';
+import http from 'http';
+import { registerRoutes } from './routes';
+import { setupVite, serveStatic, log } from './vite';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const app = express();
 app.use(express.json());
@@ -10,66 +13,58 @@ app.use(express.urlencoded({ extended: false }));
 // Logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined;
+  const reqPath = req.path;
+  let capturedJson: Record<string, any> | undefined;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+  const originalJson = res.json;
+  res.json = function (body, ...args) {
+    capturedJson = body;
+    return originalJson.apply(res, [body, ...args]);
   };
 
-  res.on("finish", () => {
+  res.on('finish', () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+    if (reqPath.startsWith('/api')) {
+      let line = `${req.method} ${reqPath} ${res.statusCode} in ${duration}ms`;
+      if (capturedJson) {
+        line += ` :: ${JSON.stringify(capturedJson)}`;
       }
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
+      if (line.length > 80) {
+        line = line.slice(0, 79) + '…';
       }
-      log(logLine);
+      log(line);
     }
   });
 
   next();
 });
 
-// Create an HTTP server (for local dev)
 const server = http.createServer(app);
 
 (async () => {
-  // Register your API routes
   await registerRoutes(app);
 
-  // Global error handler
+  // Global error handler (do not rethrow errors)
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
+    const message = err.message || 'Internal Server Error';
     res.status(status).json({ message });
-    // IMPORTANT: do NOT rethrow here or the serverless function crashes on Vercel
-    console.error("Global error handler:", err);
+    console.error('Global error handler:', err);
   });
 
-  if (app.get("env") === "development") {
-    // Dev mode: setup Vite's dev middleware for hot reload
+  if (app.get('env') === 'development') {
     await setupVite(app, server);
   } else {
-    // Production: serve static files from "dist/public"
     serveStatic(app);
   }
 
-  // Only listen if we are running locally (node server/index.ts)
-  // On Vercel, we export the app and do NOT call listen()
-  if (require.main === module) {
+  // Only start listening if this module is run directly.
+  if (process.argv[1] === __filename) {
     const port = Number(process.env.PORT) || 3000;
-    server.listen({ port, host: "0.0.0.0" }, () => {
+    server.listen({ port, host: '0.0.0.0' }, () => {
       log(`serving on port ${port}`);
     });
   }
 })();
 
-// Export for serverless (Vercel)
 export default app;
